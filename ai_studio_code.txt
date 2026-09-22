@@ -1,0 +1,153 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    name: Build & Package Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21 (JDK)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Accept Android SDK Licenses & Install Platform 36
+        run: |
+          mkdir -p "$ANDROID_HOME/licenses" || true
+          printf "89337d1226770e742f1d64bfa7338d454417978c\nd56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c2829b004d1fee\n" > "$ANDROID_HOME/licenses/android-sdk-license"
+          printf "84831b9409646a918e30573bab4c9c91346d8abd\n504667f4c0de7af1a06de9f4b1727b816f454d0d\n" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+          printf "d975465961847410050e64550eab40c5410722c0\n" > "$ANDROID_HOME/licenses/intel-android-extra-license"
+          printf "e9acab5b5f1551a4d44a53e0d406e778430f878a\n" > "$ANDROID_HOME/licenses/google-gdk-license"
+          printf "33b6a2b64f079d1da2fce7f4761854b6ee6007f9\n" > "$ANDROID_HOME/licenses/mips-android-extra-license"
+          SDK_CMD=""
+          if command -v sdkmanager >/dev/null 2>&1; then
+            SDK_CMD="sdkmanager"
+          elif [ -f "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
+            SDK_CMD="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          fi
+          if [ -n "$SDK_CMD" ]; then
+            yes | "$SDK_CMD" --licenses || true
+            "$SDK_CMD" "platforms;android-36" "build-tools;36.0.0" || true
+          fi
+
+      - name: Set up Node.js 22 (LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build Production Web App
+        run: npm run build
+
+      - name: Sync Capacitor Android
+        run: |
+          CI=true CAPACITOR_TELEMETRY=0 npx cap sync android
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          build-root-directory: android
+          validate-wrappers: false
+
+      - name: Grant Execute Permission & Prepare Android Resources
+        run: |
+          if [ ! -f "android/gradlew" ]; then
+            echo "Warning: android/gradlew missing, attempting recovery..."
+            npx cap add android || true
+          fi
+          sed -i 's/\r$//' android/gradlew || true
+          chmod +x android/gradlew
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.png
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.png
+          mkdir -p android/app/src/main/res/xml
+          if [ ! -f "android/app/src/main/res/xml/file_paths.xml" ]; then
+            echo '<?xml version="1.0" encoding="utf-8"?>' > android/app/src/main/res/xml/file_paths.xml
+            echo '<paths xmlns:android="http://schemas.android.com/apk/res/android">' >> android/app/src/main/res/xml/file_paths.xml
+            echo '    <files-path name="my_images" path="." />' >> android/app/src/main/res/xml/file_paths.xml
+            echo '    <cache-path name="my_cache_images" path="." />' >> android/app/src/main/res/xml/file_paths.xml
+            echo '    <external-files-path name="my_images" path="." />' >> android/app/src/main/res/xml/file_paths.xml
+            echo '    <external-cache-path name="my_cache_images" path="." />' >> android/app/src/main/res/xml/file_paths.xml
+            echo '    <external-path name="my_external_images" path="." />' >> android/app/src/main/res/xml/file_paths.xml
+            echo '</paths>' >> android/app/src/main/res/xml/file_paths.xml
+          fi
+
+      - name: Build Android Debug APK with Gradle
+        run: |
+          cd android
+          VERSION_CODE=$(( 1000 + ${{ github.run_number }} ))
+          VERSION_NAME="1.0.${{ github.run_number }}"
+          echo "Building Falcon POS with VersionCode: $VERSION_CODE, VersionName: $VERSION_NAME"
+          ./gradlew assembleDebug --no-daemon -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --stacktrace
+
+      - name: Locate and Package APK
+        run: |
+          mkdir -p dist-apk
+          APK_FILE=$(find android/app/build/outputs -type f -name "*.apk" | head -n 1)
+          if [ -z "$APK_FILE" ]; then
+            APK_FILE=$(find . -name "*.apk" -not -path "*/dist-apk/*" -not -path "*/node_modules/*" | head -n 1)
+          fi
+          if [ -n "$APK_FILE" ] && [ -f "$APK_FILE" ]; then
+            echo "Found APK: $APK_FILE"
+            cp "$APK_FILE" dist-apk/Falcon-POS.apk
+            cp "$APK_FILE" dist-apk/FalconPos.apk
+            cp "$APK_FILE" dist-apk/Falcon-Rod-Maker.apk
+            echo "Successfully prepared APKs in dist-apk/:"
+            ls -la dist-apk
+          else
+            echo "Error: APK file not found!"
+            find android/app/build || true
+            exit 1
+          fi
+
+      - name: Upload APK as Workflow Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Falcon-POS-APK
+          path: dist-apk/*
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish GitHub Release with APK
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "v1.0.${{ github.run_number }}"
+          name: "Falcon POS — v1.0.${{ github.run_number }}"
+          body: |
+            ### 📱 Falcon POS (Workshop & Industrial ERP) Android APK
+
+            Download the ready-to-install Android package (`Falcon-POS.apk`) attached below.
+
+            - **App Name**: Falcon POS
+            - **Version**: 1.0.${{ github.run_number }} (Build: ${{ github.run_number }})
+            - **Build Run**: #${{ github.run_number }}
+            - **Commit**: ${{ github.sha }}
+            - **Branch**: ${{ github.ref_name }}
+            - **Auto-Update Supported**: Upgrades smoothly over existing installations without deleting the app.
+
+            #### Quick Install / Update Instructions:
+            1. Download `Falcon-POS.apk`.
+            2. Tap to install directly over your existing Falcon POS app.
+          files: |
+            dist-apk/Falcon-POS.apk
+            dist-apk/FalconPos.apk
+            dist-apk/Falcon-Rod-Maker.apk
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
