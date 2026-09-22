@@ -1,0 +1,22 @@
+{
+  "short_name": "Falcon Rod Maker",
+  "name": "Falcon Rod Maker — POS & ERP",
+  "description": "Industrial-grade Point of Sale and Workshop ERP system for fan accessories, managing sales, multi-tier industrial ledgers, inventory, and analytics.",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/logo-final.png",
+      "type": "image/png",
+      "sizes": "600x696"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#121417",
+  "theme_color": "#1c1f22",
+  "display": "standalone",
+  "orientation": "portrait"
+}

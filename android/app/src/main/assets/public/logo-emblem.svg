@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 450" width="100%" height="100%">
+  <defs>
+    <!-- Downrod Pipe 3D Metallic/White Powder-Coat Finish -->
+    <linearGradient id="rodPipeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8" />
+      <stop offset="20%" stop-color="#e2e8f0" />
+      <stop offset="45%" stop-color="#ffffff" />
+      <stop offset="70%" stop-color="#cbd5e1" />
+      <stop offset="100%" stop-color="#64748b" />
+    </linearGradient>
+
+    <!-- Chrome / Steel Clamping Bracket -->
+    <linearGradient id="chromeYoke" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="35%" stop-color="#e2e8f0" />
+      <stop offset="70%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+
+    <!-- Rubber Vibration Bushing on Shackle (Dark Charcoal) -->
+    <linearGradient id="rubberBush" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="50%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <!-- Shackle Cross Bolt with Center Eye -->
+    <linearGradient id="boltSteel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#64748b" />
+      <stop offset="40%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+
+    <!-- Soft Drop Shadow for Rod Depth -->
+    <filter id="rodDropShadow" x="-10%" y="-15%" width="125%" height="135%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- ========================================== -->
+  <!-- 1. SOARING FALCON SILHOUETTE (SOLID BLACK) -->
+  <!-- ========================================== -->
+  <g fill="#0b0f19" id="falcon-silhouette">
+    <!-- Top-most Primary Wing Feather (Long Swept Wing) -->
+    <path d="M 85 40 C 135 105 185 150 270 165 C 235 150 190 120 150 80 C 120 50 100 43 85 40 Z" />
+    <!-- 2nd Primary Wing Feather -->
+    <path d="M 105 90 C 150 140 200 173 285 183 C 240 170 195 145 160 113 C 135 91 118 89 105 90 Z" />
+    <!-- 3rd Wing Feather -->
+    <path d="M 125 135 C 170 175 220 200 300 205 C 255 195 210 175 175 150 C 150 133 135 133 125 135 Z" />
+    <!-- 4th Wing Feather -->
+    <path d="M 148 177 C 185 207 235 225 310 227 C 270 220 225 203 190 185 C 170 175 156 175 148 177 Z" />
+    <!-- 5th Wing Feather -->
+    <path d="M 175 215 C 205 235 250 247 320 245 C 285 241 245 229 212 215 C 195 209 184 210 175 215 Z" />
+    <!-- 6th Wing Feather & Coverts -->
+    <path d="M 205 247 C 235 259 275 263 332 259 C 300 255 265 245 236 237 C 220 233 212 237 205 247 Z" />
+
+    <!-- Falcon Head, Neck Arch & Sharp Beak -->
+    <path d="M 290 160 C 330 185 355 210 375 210 C 390 210 410 207 430 215 C 445 220 455 230 450 240 C 440 250 425 247 410 243 C 395 240 385 243 375 250 C 345 273 300 283 245 287 C 180 290 135 265 100 243 C 145 280 210 300 280 295 C 335 291 385 275 415 250 C 425 243 435 243 445 237 C 430 231 415 230 400 231 C 385 233 370 225 355 210 C 335 190 310 175 290 160 Z" />
+    
+    <!-- Curved Hook Beak -->
+    <path d="M 430 215 C 448 220 460 230 455 247 C 450 235 442 230 432 227 C 420 225 405 227 390 227 C 405 220 420 217 430 215 Z" />
+    
+    <!-- Keen Falcon Eye -->
+    <circle cx="410" cy="227" r="3.5" fill="#ffffff" />
+    <path d="M 404 225 Q 410 221 416 225 Q 410 229 404 225 Z" fill="#0b0f19" />
+
+    <!-- Aerodynamic Underbelly & Tail Swoops -->
+    <path d="M 120 265 C 180 305 260 317 340 295 C 280 310 200 300 145 273 C 132 267 124 265 120 265 Z" />
+    <path d="M 155 292 C 215 324 295 326 360 302 C 305 318 230 316 175 298 C 165 294 159 292 155 292 Z" />
+    <!-- Tail Feather Flow -->
+    <path d="M 130 308 C 200 338 275 344 335 324 C 270 336 190 330 140 312 C 134 310 131 308 130 308 Z" />
+  </g>
+
+  <!-- ========================================================= -->
+  <!-- 2. CEILING FAN DOWNROD PIPE ASSEMBLY DIRECTLY UNDER FALCON -->
+  <!-- ========================================================= -->
+  <g id="ceiling-fan-downrod" transform="translate(115, 325) rotate(9.5 130 20)" filter="url(#rodDropShadow)">
+    <!-- Mounting Bracket / Shackle (Left Side) -->
+    <!-- Rubber Vibration Damper Bushing -->
+    <rect x="2" y="5" width="28" height="34" rx="5" fill="url(#rubberBush)" stroke="#334155" stroke-width="1.5" />
+    <rect x="5" y="10" width="22" height="6" rx="2" fill="#090d16" opacity="0.95" />
+    <rect x="5" y="27" width="22" height="6" rx="2" fill="#090d16" opacity="0.95" />
+
+    <!-- Shackle Center Cross Bolt & Steel Bushing -->
+    <circle cx="16" cy="22" r="7.5" fill="url(#boltSteel)" stroke="#1e293b" stroke-width="1.5" />
+    <circle cx="16" cy="22" r="4" fill="#0f172a" />
+    <circle cx="15" cy="21" r="1.5" fill="#ffffff" opacity="0.6" />
+
+    <!-- Cotter Pin / R-Clip Retainer on Top -->
+    <path d="M 14 3 C 14 0, 20 0, 20 3 L 20 5 L 14 5 Z" fill="#94a3b8" stroke="#475569" stroke-width="0.75" />
+    <circle cx="17" cy="2" r="1.2" fill="#ffffff" />
+
+    <!-- Grounding Wire Eyelet Tab (Top Left) -->
+    <path d="M 26 8 C 30 6, 35 10, 33 14 L 30 16 Z" fill="url(#chromeYoke)" stroke="#64748b" stroke-width="0.75" />
+
+    <!-- Shackle Metal Clamping Yoke / Sleeve (Tapering to Tube) -->
+    <path d="M 22 11 L 46 15 L 46 29 L 22 33 Z" fill="url(#chromeYoke)" stroke="#64748b" stroke-width="1.2" />
+    <circle cx="36" cy="22" r="2.8" fill="#1e293b" stroke="#cbd5e1" stroke-width="0.5" />
+
+    <!-- Main Steel Downrod Pipe Body (White / Metallic Tube) -->
+    <!-- Outer Tube with 3D cylindrical lighting -->
+    <rect x="44" y="15" width="225" height="14" rx="7" fill="url(#rodPipeGrad)" stroke="#64748b" stroke-width="1.2" />
+    
+    <!-- Top Highlight Specular Core Streak -->
+    <line x1="48" y1="18.5" x2="260" y2="18.5" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.95" />
+    <!-- Secondary Soft Reflection Streak -->
+    <line x1="48" y1="23.5" x2="260" y2="23.5" stroke="#94a3b8" stroke-width="1" stroke-linecap="round" opacity="0.5" />
+    <!-- Underside Ambient Shadow -->
+    <line x1="48" y1="27.5" x2="260" y2="27.5" stroke="#475569" stroke-width="1.2" stroke-linecap="round" opacity="0.7" />
+
+    <!-- Right End Fan Coupling Terminal (Drilled Cotter Pin Hole) -->
+    <circle cx="254" cy="22" r="3.2" fill="#0f172a" stroke="#cbd5e1" stroke-width="1" />
+    <circle cx="254" cy="22" r="1.5" fill="#000000" />
+    
+    <!-- Wiring Safety Slit Hole near Upper End -->
+    <circle cx="64" cy="22" r="2.2" fill="#1e293b" stroke="#cbd5e1" stroke-width="0.5" />
+  </g>
+</svg>

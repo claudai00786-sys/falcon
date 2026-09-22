@@ -1,0 +1,10 @@
+{
+  "name": "Falcon Rod Maker",
+  "description": "Offline POS with data synchronization, end-to-end encrypted transaction records, detailed sales and inventory tracking, and real-time business performance analytics.",
+h  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

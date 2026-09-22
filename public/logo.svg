@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 580" width="100%" height="100%">
+  <defs>
+    <!-- Rod metallic finish gradient -->
+    <linearGradient id="rodTubeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8" />
+      <stop offset="25%" stop-color="#e2e8f0" />
+      <stop offset="50%" stop-color="#ffffff" />
+      <stop offset="75%" stop-color="#cbd5e1" />
+      <stop offset="100%" stop-color="#64748b" />
+    </linearGradient>
+
+    <!-- Chrome / Steel Sheen -->
+    <linearGradient id="chromeSheen" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#e2e8f0" />
+      <stop offset="50%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+
+    <!-- Shackle Rubber Bush Dark Tone -->
+    <linearGradient id="rubberBushGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="50%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <!-- Bolt Steel -->
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#64748b" />
+      <stop offset="40%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#475569" />
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow -->
+    <filter id="logoShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- ========================================== -->
+  <!-- 1. SOARING FALCON EMBLEM (VECTOR PATHS)    -->
+  <!-- ========================================== -->
+  <g id="falcon-emblem" fill="currentColor" class="falcon-wing-group">
+    <!-- Top Most Primary Wing Feather -->
+    <path d="M 85 45 C 135 110 185 155 270 170 C 235 155 190 125 150 85 C 120 55 100 48 85 45 Z" />
+
+    <!-- Second Primary Wing Feather -->
+    <path d="M 105 95 C 150 145 200 178 285 188 C 240 175 195 150 160 118 C 135 96 118 94 105 95 Z" />
+
+    <!-- Third Wing Feather -->
+    <path d="M 125 140 C 170 180 220 205 300 210 C 255 200 210 180 175 155 C 150 138 135 138 125 140 Z" />
+
+    <!-- Fourth Wing Feather -->
+    <path d="M 148 182 C 185 212 235 230 310 232 C 270 225 225 208 190 190 C 170 180 156 180 148 182 Z" />
+
+    <!-- Fifth Wing Feather -->
+    <path d="M 175 220 C 205 240 250 252 320 250 C 285 246 245 234 212 220 C 195 214 184 215 175 220 Z" />
+
+    <!-- Sixth Wing Feather & Coverts -->
+    <path d="M 205 252 C 235 264 275 268 332 264 C 300 260 265 250 236 242 C 220 238 212 242 205 252 Z" />
+
+    <!-- Main Body & Head Curve -->
+    <path d="M 290 165 C 330 190 355 215 375 215 C 390 215 410 212 430 220 C 445 225 455 235 450 245 C 440 255 425 252 410 248 C 395 245 385 248 375 255 C 345 278 300 288 245 292 C 180 295 135 270 100 248 C 145 285 210 305 280 300 C 335 296 385 280 415 255 C 425 248 435 248 445 242 C 430 236 415 235 400 236 C 385 238 370 230 355 215 C 335 195 310 180 290 165 Z" />
+
+    <!-- Falcon Beak & Keen Eye Hook -->
+    <path d="M 430 220 C 448 225 460 235 455 252 C 450 240 442 235 432 232 C 420 230 405 232 390 232 C 405 225 420 222 430 220 Z" />
+
+    <!-- Falcon Eye Slit cutout -->
+    <circle cx="410" cy="232" r="3.5" fill="#ffffff" />
+    <path d="M 404 230 Q 410 226 416 230 Q 410 234 404 230 Z" fill="currentColor" />
+
+    <!-- Aerodynamic Underbelly Swoops (Motion Streamlines) -->
+    <path d="M 120 270 C 180 310 260 322 340 300 C 280 315 200 305 145 278 C 132 272 124 270 120 270 Z" />
+    <path d="M 160 298 C 220 330 300 332 365 308 C 310 324 235 322 180 304 C 170 300 164 298 160 298 Z" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. CEILING FAN DOWNROD PIPE ASSEMBLY       -->
+  <!-- ========================================== -->
+  <g id="fan-downrod-assembly" transform="translate(115, 335)" filter="url(#logoShadow)">
+    <!-- Mounting Bracket / Shackle (Left Side) -->
+    <!-- Top Rubber Vibration Pad / Grommet -->
+    <rect x="0" y="4" width="28" height="34" rx="5" fill="url(#rubberBushGrad)" stroke="#475569" stroke-width="1.5" />
+    <rect x="3" y="9" width="22" height="6" rx="2" fill="#0f172a" />
+    <rect x="3" y="27" width="22" height="6" rx="2" fill="#0f172a" />
+
+    <!-- Shackle Cross Bolt with Nut -->
+    <circle cx="14" cy="21" r="7" fill="url(#boltGrad)" stroke="#1e293b" stroke-width="1.5" />
+    <circle cx="14" cy="21" r="3.5" fill="#334155" />
+
+    <!-- Shackle Metal Clamping Yoke -->
+    <path d="M 18 10 L 42 16 L 42 26 L 18 32 Z" fill="url(#chromeSheen)" stroke="#475569" stroke-width="1" />
+    <circle cx="34" cy="21" r="2.5" fill="#1e293b" />
+
+    <!-- Main Steel Downrod Pipe Body -->
+    <rect x="40" y="16" width="200" height="11" rx="5.5" fill="url(#rodTubeGrad)" stroke="#64748b" stroke-width="1" />
+    
+    <!-- Specular Highlight Streak on Downrod -->
+    <line x1="44" y1="19" x2="236" y2="19" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.9" />
+    <line x1="44" y1="23" x2="236" y2="23" stroke="#94a3b8" stroke-width="1" stroke-linecap="round" opacity="0.6" />
+
+    <!-- Downrod Right Tip (Beveled Terminal with Pin Hole) -->
+    <circle cx="230" cy="21.5" r="3" fill="#1e293b" stroke="#e2e8f0" stroke-width="0.75" />
+    <circle cx="230" cy="21.5" r="1.5" fill="#0f172a" />
+
+    <!-- Wiring Grommet Notch -->
+    <circle cx="55" cy="21.5" r="2" fill="#334155" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. BRAND NAME TYPOGRAPHY                   -->
+  <!-- ========================================== -->
+  <g id="brand-typography" text-anchor="middle">
+    <!-- "Falcon Rod Maker" in Regal Serif -->
+    <text
+      x="250"
+      y="470"
+      fill="currentColor"
+      font-family="'Playfair Display', 'Times New Roman', 'Georgia', serif"
+      font-size="44"
+      font-weight="700"
+      letter-spacing="1.5"
+    >
+      Falcon Rod Maker
+    </text>
+
+    <!-- "GUJRAT" with Spaced Sans-Serif -->
+    <text
+      x="250"
+      y="505"
+      fill="currentColor"
+      font-family="'IBM Plex Sans', 'Helvetica Neue', 'Arial', sans-serif"
+      font-size="19"
+      font-weight="600"
+      letter-spacing="9"
+      opacity="0.9"
+    >
+      GUJRAT
+    </text>
+  </g>
+</svg>
